@@ -9,6 +9,11 @@
 - CI/CD with GitHub Actions; Docker image published to GHCR.
 
 ## Quickstart (Local)
+Clone and enter the project first:
+```bash
+git clone https://github.com/NM00001/Assignment_3_mlops.git
+cd Assignment_3_mlops
+```
 1. Python 3.11
 2. Install deps:
 ```bash
@@ -31,7 +36,7 @@ Optional: run v0.2 locally instead of v0.1
 make train-v0.2
 MODEL_PATH=artifacts/model_v0_2.joblib make api
 ```
-Or simply use the GHCR images below. (Tip: making a small README tweak like this can also be used to trigger CI.)
+Or simply use the GHCR images below.
 
 ### Sample payload
 ```json
@@ -70,3 +75,19 @@ docker run --rm -p 8000:8000 ghcr.io/nm00001/assignment_3_mlops:v0.2
 ## Reproduce
 - Deterministic seeds; pinned requirements.
 - See `CHANGELOG.md` for v0.1 → v0.2 metrics and rationale.
+
+### Reproduce locally
+
+v0.1
+```bash
+make install
+make train-v0.1
+MODEL_PATH=artifacts/model_v0_1.joblib make api
+```
+
+v0.2
+```bash
+make install
+make train-v0.2
+MODEL_PATH=artifacts/model_v0_2.joblib make api
+```
