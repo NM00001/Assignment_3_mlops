@@ -22,17 +22,20 @@ _model_meta = {}
 def load_model():
     global _model, _model_meta
     if not MODEL_PATH.exists():
-        raise FileNotFoundError(f"Model file not found at {MODEL_PATH}")
+        # Defer loading if artifact missing (e.g., in CI before training)
+        return False
     payload = joblib.load(MODEL_PATH)
     _model = payload["model"]
     _model_meta = {
         "feature_order": payload.get("feature_order"),
         "model_version": payload.get("model_version", "unknown"),
     }
+    return True
 
 
 @app.on_event("startup")
 async def _startup():
+    # Attempt to load if available; tolerate missing artifact
     load_model()
 
 
@@ -44,7 +47,9 @@ async def health():
 @app.post("/predict", response_model=PredictResponse)
 async def predict(req: PredictRequest) -> PredictResponse:
     if _model is None:
-        raise HTTPException(status_code=500, detail="Model not loaded")
+        # Try lazy load once
+        if not load_model():
+            raise HTTPException(status_code=500, detail="Model not loaded")
     try:
         features: List[float] = [getattr(req, f) for f in FEATURE_ORDER]
     except ValidationError as e:
