@@ -6,7 +6,6 @@ from sklearn.model_selection import train_test_split
 
 from .version import RANDOM_STATE
 
-
 FEATURE_ORDER = [
     "age",
     "sex",
