@@ -11,7 +11,6 @@ from mlops_diabetes.version import APP_VERSION
 
 from .schemas import PredictRequest, PredictResponse
 
-
 MODEL_PATH = Path(os.getenv("MODEL_PATH", "artifacts/model_v0_1.joblib"))
 
 app = FastAPI(title="Diabetes Progression API", version=APP_VERSION)
