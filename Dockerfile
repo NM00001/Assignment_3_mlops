@@ -16,8 +16,10 @@ COPY src ./src
 COPY app ./app
 COPY pyproject.toml ./
 
+# Build arg to select which training script to run (v0.1 by default)
+ARG TRAIN_SCRIPT=mlops_diabetes.train_v0_1
 # Train model with fixed seeds; save under /app/artifacts
-RUN python -m mlops_diabetes.train_v0_1 --artifacts-dir artifacts
+RUN python -m ${TRAIN_SCRIPT} --artifacts-dir artifacts
 
 # --- runtime: small image with only what we need ---
 FROM python:3.11-slim AS runtime
@@ -33,7 +35,9 @@ COPY --from=builder /app/src ./src
 COPY --from=builder /app/artifacts ./artifacts
 COPY --from=builder /app/pyproject.toml ./
 
-ENV MODEL_PATH=artifacts/model_v0_1.joblib
+# Build arg to set the model file to use at runtime
+ARG MODEL_FILE=artifacts/model_v0_1.joblib
+ENV MODEL_PATH=${MODEL_FILE}
 EXPOSE 8000
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
