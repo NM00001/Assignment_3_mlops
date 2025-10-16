@@ -55,10 +55,10 @@ docker run --rm -p 8000:8000 ghcr.io/nm00001/assignment_3_mlops:v0.2
 - PR/Push: lint, tests, training smoke, upload artifacts.
 - Tag `v*`: build & push GHCR image, container smoke, publish Release with metrics.
 
-## GHCR Setup
-- Create repo-level secrets:
-  - `GHCR_PAT` (token with `packages:write`, `read:packages`, `repo`)
-  - Optionally set Repository variables `GHCR_OWNER` (your GitHub username/org) and `IMAGE_NAME` (defaults to `<owner>/<repo>` if omitted)
+## Release/Permissions
+- The Release workflow uses the built-in `GITHUB_TOKEN`.
+- Ensure repo Settings → Actions → General → Workflow permissions = **Read and write permissions**.
+- Make the container package public after the first release (GitHub → Packages → container → Public).
 
 ## Reproduce
 - Deterministic seeds; pinned requirements.
