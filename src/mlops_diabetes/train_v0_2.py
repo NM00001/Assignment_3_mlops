@@ -21,7 +21,7 @@ def train(artifacts_dir: Path) -> dict:
     pipe = Pipeline(
         steps=[
             ("scaler", StandardScaler()),
-            ("reg", Ridge(alpha=1.0, random_state=42)),
+            ("reg", Ridge(alpha=1.0)),
         ]
     )
     pipe.fit(X_train, y_train)
