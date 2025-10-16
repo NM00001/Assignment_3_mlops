@@ -43,4 +43,14 @@ ENV MODEL_FILE=$MODEL_FILE
 ENV MODEL_PATH=$MODEL_FILE
 EXPOSE 8000
 
+# Healthcheck: query /health using Python stdlib (no extra deps)
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD python - <<'PY'
+import sys, urllib.request
+try:
+    with urllib.request.urlopen('http://localhost:8000/health', timeout=4) as r:
+        sys.exit(0 if r.status == 200 else 1)
+except Exception:
+    sys.exit(1)
+PY
+
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,5 +1,8 @@
 # Virtual Diabetes Clinic Triage – MLOps Assignment
 
+![CI](https://github.com/NM00001/Assignment_3_mlops/actions/workflows/ci.yml/badge.svg)
+![Release](https://github.com/NM00001/Assignment_3_mlops/actions/workflows/release.yml/badge.svg)
+
 ## Overview
 - Predict short-term progression using scikit-learn Diabetes dataset.
 - Serve a regression model via FastAPI.
@@ -38,6 +41,16 @@ docker build -t diabetes-mlops:local .
 docker run --rm -p 8000:8000 diabetes-mlops:local
 ```
 
+Run published images from GHCR:
+```bash
+docker pull ghcr.io/nm00001/assignment_3_mlops:v0.1
+docker run --rm -p 8000:8000 ghcr.io/nm00001/assignment_3_mlops:v0.1
+
+# or v0.2
+docker pull ghcr.io/nm00001/assignment_3_mlops:v0.2
+docker run --rm -p 8000:8000 ghcr.io/nm00001/assignment_3_mlops:v0.2
+```
+
 ## CI/CD
 - PR/Push: lint, tests, training smoke, upload artifacts.
 - Tag `v*`: build & push GHCR image, container smoke, publish Release with metrics.
@@ -49,4 +62,4 @@ docker run --rm -p 8000:8000 diabetes-mlops:local
 
 ## Reproduce
 - Deterministic seeds; pinned requirements.
-- See `CHANGELOG.md` for v0.1 → v0.2 metrics and rationale..
+- See `CHANGELOG.md` for v0.1 → v0.2 metrics and rationale.

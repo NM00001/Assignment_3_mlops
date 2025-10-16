@@ -8,13 +8,16 @@ PKG=mlops_diabetes
 ARTIFACTS_DIR=artifacts
 MODEL_PATH=$(ARTIFACTS_DIR)/model_v0_1.joblib
 
-.PHONY: install train-v0.1 run api test lint docker-build docker-run
+.PHONY: install train-v0.1 train-v0.2 run api test lint docker-build docker-run
 
 install:
 	python3 -m venv $(VENV) && $(PIP) install -U pip && $(PIP) install -r requirements.txt
 
 train-v0.1:
 	PYTHONPATH=src $(PYTHON) -m $(PKG).train_v0_1 --artifacts-dir $(ARTIFACTS_DIR)
+
+train-v0.2:
+	PYTHONPATH=src $(PYTHON) -m $(PKG).train_v0_2 --artifacts-dir $(ARTIFACTS_DIR)
 
 run:
 	PYTHONPATH=src $(UVICORN) app.main:app --host 0.0.0.0 --port 8000 --reload
