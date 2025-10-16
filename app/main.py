@@ -8,7 +8,6 @@ from pydantic import ValidationError
 
 from mlops_diabetes.data import FEATURE_ORDER
 from mlops_diabetes.version import APP_VERSION
-
 from .schemas import PredictRequest, PredictResponse
 
 MODEL_PATH = Path(os.getenv("MODEL_PATH", "artifacts/model_v0_1.joblib"))
