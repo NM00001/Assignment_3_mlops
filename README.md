@@ -26,6 +26,13 @@ make api
 - GET http://localhost:8000/health
 - POST http://localhost:8000/predict
 
+Optional: run v0.2 locally instead of v0.1
+```bash
+make train-v0.2
+MODEL_PATH=artifacts/model_v0_2.joblib make api
+```
+Or simply use the GHCR images below. (Tip: making a small README tweak like this can also be used to trigger CI.)
+
 ### Sample payload
 ```json
 {
