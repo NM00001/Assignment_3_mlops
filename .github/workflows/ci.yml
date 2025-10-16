@@ -22,11 +22,11 @@ jobs:
         run: ruff check . --fix
       - name: Tests
         env:
-          PYTHONPATH: src:app
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/src:${{ github.workspace }}/app
         run: pytest -q
       - name: Training smoke & upload artifacts
         env:
-          PYTHONPATH: src:app
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/src:${{ github.workspace }}/app
         run: |
           python -m mlops_diabetes.train_v0_1 --artifacts-dir artifacts
       - uses: actions/upload-artifact@v4
