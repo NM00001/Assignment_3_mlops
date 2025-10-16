@@ -8,6 +8,7 @@ from pydantic import ValidationError
 
 from mlops_diabetes.data import FEATURE_ORDER
 from mlops_diabetes.version import APP_VERSION
+
 from .schemas import PredictRequest, PredictResponse
 
 
