@@ -49,4 +49,4 @@ docker run --rm -p 8000:8000 diabetes-mlops:local
 
 ## Reproduce
 - Deterministic seeds; pinned requirements.
-- See `CHANGELOG.md` for v0.1 → v0.2 metrics and rationale.
+- See `CHANGELOG.md` for v0.1 → v0.2 metrics and rationale..
