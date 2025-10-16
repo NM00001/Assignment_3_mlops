@@ -2,8 +2,8 @@ import os
 from pathlib import Path
 from typing import List
 
-from fastapi import FastAPI, HTTPException
 import joblib
+from fastapi import FastAPI, HTTPException
 from pydantic import ValidationError
 
 from mlops_diabetes.data import FEATURE_ORDER
