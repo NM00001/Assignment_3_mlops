@@ -31,7 +31,14 @@ def train(artifacts_dir: Path) -> dict:
 
     artifacts_dir.mkdir(parents=True, exist_ok=True)
     model_path = artifacts_dir / f"model_{MODEL_VERSION}.joblib"
-    joblib.dump({"model": pipe, "feature_order": FEATURE_ORDER, "model_version": MODEL_VERSION}, model_path)
+    joblib.dump(
+        {
+            "model": pipe,
+            "feature_order": FEATURE_ORDER,
+            "model_version": MODEL_VERSION,
+        },
+        model_path,
+    )
 
     metrics_path = artifacts_dir / f"metrics_{MODEL_VERSION}.json"
     with metrics_path.open("w", encoding="utf-8") as f:
